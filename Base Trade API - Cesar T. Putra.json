@@ -1,0 +1,502 @@
+{
+    "collection": {
+    "info": {
+        "_postman_id": "70af29c3-606c-4c63-bcc9-c5ea7fd79caa",
+        "name": "Final Project Golang",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "updatedAt": "2023-11-27T17:56:53.000Z",
+        "uid": "8991000-70af29c3-606c-4c63-bcc9-c5ea7fd79caa"
+    },
+    "item": [
+        {
+        "name": "Auth",
+        "item": [
+            {
+            "name": "Register",
+            "id": "7337af27-1ff4-4f81-899e-2b4341237be2",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                "mode": "raw",
+                "raw": "{\n    \"name\": \"bambang\",\n    \"email\": \"bambang@gmail.com\",\n    \"password\": \"bambang123\",\n    \"passwordCheck\": \"bambang123\"\n}",
+                "options": {
+                    "raw": {
+                    "language": "json"
+                    }
+                }
+                },
+                "url": {
+                "raw": "https://golang-final-project-production-1805.up.railway.app/api/auth/register",
+                "protocol": "https",
+                "host": [
+                    "golang-final-project-production-1805",
+                    "up",
+                    "railway",
+                    "app"
+                ],
+                "path": [
+                    "api",
+                    "auth",
+                    "register"
+                ]
+                }
+            },
+            "response": [],
+            "uid": "8991000-7337af27-1ff4-4f81-899e-2b4341237be2"
+            },
+            {
+            "name": "Login",
+            "id": "6f7c824f-3380-4453-9769-e938036733c8",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                "mode": "raw",
+                "raw": "{\n    \"email\": \"bambang@gmail.com\",\n    \"password\": \"bambang123\"\n}",
+                "options": {
+                    "raw": {
+                    "language": "json"
+                    }
+                }
+                },
+                "url": {
+                "raw": "https://golang-final-project-production-1805.up.railway.app/api/auth/login",
+                "protocol": "https",
+                "host": [
+                    "golang-final-project-production-1805",
+                    "up",
+                    "railway",
+                    "app"
+                ],
+                "path": [
+                    "api",
+                    "auth",
+                    "login"
+                ]
+                }
+            },
+            "response": [],
+            "uid": "8991000-6f7c824f-3380-4453-9769-e938036733c8"
+            }
+        ],
+        "id": "026632c9-9e15-429d-8902-6c7f530ec254",
+        "uid": "8991000-026632c9-9e15-429d-8902-6c7f530ec254"
+        },
+        {
+        "name": "Product",
+        "item": [
+            {
+            "name": "Get All Products",
+            "id": "e1739ac9-e48f-4f75-b05d-8e1a5fc2dcfb",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "auth": {
+                "type": "noauth"
+                },
+                "method": "GET",
+                "header": [
+                {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoiOGQ4YTg4ZDktNGU5Yy00YjVmLWI3OGUtMjg4NTUxNmQwODNhIiwiZXhwIjoxNzAxMjk5NzgyfQ.eCaNjzoWZsTAzESIjqYY-C4elq3v8s3c1P3u4fKpfqE",
+                    "type": "text"
+                }
+                ],
+                "url": {
+                "raw": "https://golang-final-project-production-1805.up.railway.app/api/products?page=1&pageSize=2",
+                "protocol": "https",
+                "host": [
+                    "golang-final-project-production-1805",
+                    "up",
+                    "railway",
+                    "app"
+                ],
+                "path": [
+                    "api",
+                    "products"
+                ],
+                "query": [
+                    {
+                    "key": "page",
+                    "value": "1"
+                    },
+                    {
+                    "key": "pageSize",
+                    "value": "2"
+                    }
+                ]
+                }
+            },
+            "response": [],
+            "uid": "8991000-e1739ac9-e48f-4f75-b05d-8e1a5fc2dcfb"
+            },
+            {
+            "name": "Create Product",
+            "id": "5c54305d-8461-404a-91d3-6fd31b065836",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoiOGQ4YTg4ZDktNGU5Yy00YjVmLWI3OGUtMjg4NTUxNmQwODNhIiwiZXhwIjoxNzAxMjk5NzgyfQ.eCaNjzoWZsTAzESIjqYY-C4elq3v8s3c1P3u4fKpfqE",
+                    "type": "text"
+                }
+                ],
+                "body": {
+                "mode": "raw",
+                "raw": "{\n    \"name\": \"iPad Mini 6th\",\n    \"imageUrl\": \"https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-ipad-mini-wifi-pink-gallery-2022_AV1?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1674165793948\"\n}",
+                "options": {
+                    "raw": {
+                    "language": "json"
+                    }
+                }
+                },
+                "url": {
+                "raw": "https://golang-final-project-production-1805.up.railway.app/api/products",
+                "protocol": "https",
+                "host": [
+                    "golang-final-project-production-1805",
+                    "up",
+                    "railway",
+                    "app"
+                ],
+                "path": [
+                    "api",
+                    "products"
+                ]
+                }
+            },
+            "response": [],
+            "uid": "8991000-5c54305d-8461-404a-91d3-6fd31b065836"
+            },
+            {
+            "name": "Update Product By ID",
+            "id": "b9e77947-314b-42de-8f29-e244a197555a",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "PUT",
+                "header": [
+                {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoiNDcxMWJlMTUtOTU2Zi00YzNlLWI0YzQtZjIzZTEwODRjZDcwIiwiZXhwIjoxNzAxMjU2NTI4fQ.3T_Qbrk_iQRVouOvoVZJEGa7yzEMeljveWiF9-j5Yi0",
+                    "type": "text"
+                }
+                ],
+                "body": {
+                "mode": "raw",
+                "raw": "{\n    \"name\": \"iPad Pro M1 update\",\n    \"imageUrl\": \"https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-ipad-mini-wifi-pink-gallery-2022_AV1?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1674165793948\"\n}",
+                "options": {
+                    "raw": {
+                    "language": "json"
+                    }
+                }
+                },
+                "url": {
+                "raw": "https://golang-final-project-production-1805.up.railway.app/api/products/49e5a3a3-050e-45f7-b6a1-67832eaf1bf2",
+                "protocol": "https",
+                "host": [
+                    "golang-final-project-production-1805",
+                    "up",
+                    "railway",
+                    "app"
+                ],
+                "path": [
+                    "api",
+                    "products",
+                    "49e5a3a3-050e-45f7-b6a1-67832eaf1bf2"
+                ]
+                }
+            },
+            "response": [],
+            "uid": "8991000-b9e77947-314b-42de-8f29-e244a197555a"
+            },
+            {
+            "name": "Get Product By ID",
+            "id": "0249c8ac-6b36-4fb8-b5dd-dfe46146a576",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "GET",
+                "header": [
+                {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoiOGFmN2JlYWMtY2I5My00YjA3LThiNWQtM2NjMmU2OWFkZTdhIiwiZXhwIjoxNzAxMjU1ODc2fQ.p47LPmdrBZlHAcD3XrgvMVo04ZBONc04HR9jH5Ta58U",
+                    "type": "text"
+                }
+                ],
+                "url": {
+                "raw": "https://golang-final-project-production-1805.up.railway.app/api/products/49e5a3a3-050e-45f7-b6a1-67832eaf1bf2",
+                "protocol": "https",
+                "host": [
+                    "golang-final-project-production-1805",
+                    "up",
+                    "railway",
+                    "app"
+                ],
+                "path": [
+                    "api",
+                    "products",
+                    "49e5a3a3-050e-45f7-b6a1-67832eaf1bf2"
+                ]
+                }
+            },
+            "response": [],
+            "uid": "8991000-0249c8ac-6b36-4fb8-b5dd-dfe46146a576"
+            },
+            {
+            "name": "Delete Product By ID",
+            "id": "04cd483d-ab78-49fe-8261-b29ea057b9ba",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "DELETE",
+                "header": [
+                {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoiNDcxMWJlMTUtOTU2Zi00YzNlLWI0YzQtZjIzZTEwODRjZDcwIiwiZXhwIjoxNzAxMjU2NzI1fQ.iAhgZoiSr10zDyNNxOLyBkpTBv35_1fOiegLji6a6GE",
+                    "type": "text"
+                }
+                ],
+                "url": {
+                "raw": "https://golang-final-project-production-1805.up.railway.app/api/products/49e5a3a3-050e-45f7-b6a1-67832eaf1bf2",
+                "protocol": "https",
+                "host": [
+                    "golang-final-project-production-1805",
+                    "up",
+                    "railway",
+                    "app"
+                ],
+                "path": [
+                    "api",
+                    "products",
+                    "49e5a3a3-050e-45f7-b6a1-67832eaf1bf2"
+                ]
+                }
+            },
+            "response": [],
+            "uid": "8991000-04cd483d-ab78-49fe-8261-b29ea057b9ba"
+            }
+        ],
+        "id": "ec319a0e-e2f7-470f-bd45-083e084fec71",
+        "uid": "8991000-ec319a0e-e2f7-470f-bd45-083e084fec71"
+        },
+        {
+        "name": "Variant",
+        "item": [
+            {
+            "name": "Create Variant",
+            "id": "576fc337-c7c1-46da-b4e3-11ef9e8ba509",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                "mode": "raw",
+                "raw": "{\n    \"variantName\": \"Black\",\n    \"quantity\": 100,\n    \"productID\": \"a4c9fca4-13c4-425e-8a71-73c2c5897f39\"\n}",
+                "options": {
+                    "raw": {
+                    "language": "json"
+                    }
+                }
+                },
+                "url": {
+                "raw": "https://golang-final-project-production-1805.up.railway.app/api/products/variants",
+                "protocol": "https",
+                "host": [
+                    "golang-final-project-production-1805",
+                    "up",
+                    "railway",
+                    "app"
+                ],
+                "path": [
+                    "api",
+                    "products",
+                    "variants"
+                ]
+                }
+            },
+            "response": [],
+            "uid": "8991000-576fc337-c7c1-46da-b4e3-11ef9e8ba509"
+            },
+            {
+            "name": "Get All Variant",
+            "id": "a637754e-5373-4604-9ee5-9d9e60453ae7",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "GET",
+                "header": [
+                {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoiNDcxMWJlMTUtOTU2Zi00YzNlLWI0YzQtZjIzZTEwODRjZDcwIiwiZXhwIjoxNzAxMjU4NjM3fQ.8s77KE_f_iGR5pCZ2Y2AA0VnLXcIPHApTsZKVjeVJ8s",
+                    "type": "text"
+                }
+                ],
+                "url": {
+                "raw": "https://golang-final-project-production-1805.up.railway.app/api/products/variants?page=1&pageSize=2",
+                "protocol": "https",
+                "host": [
+                    "golang-final-project-production-1805",
+                    "up",
+                    "railway",
+                    "app"
+                ],
+                "path": [
+                    "api",
+                    "products",
+                    "variants"
+                ],
+                "query": [
+                    {
+                    "key": "page",
+                    "value": "1"
+                    },
+                    {
+                    "key": "pageSize",
+                    "value": "2"
+                    }
+                ]
+                }
+            },
+            "response": [],
+            "uid": "8991000-a637754e-5373-4604-9ee5-9d9e60453ae7"
+            },
+            {
+            "name": "Get Variant By ID",
+            "id": "433b0763-22e5-4f46-86a6-3d3bc416487d",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "GET",
+                "header": [
+                {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoiNDcxMWJlMTUtOTU2Zi00YzNlLWI0YzQtZjIzZTEwODRjZDcwIiwiZXhwIjoxNzAxMjU3NDQ3fQ.CUIQS3jsRBPJvjc2N9PPmP3gYBWPbd45Slrba9hrPPM",
+                    "type": "text"
+                }
+                ],
+                "url": {
+                "raw": "https://golang-final-project-production-1805.up.railway.app/api/products/variants/8b0d9f54-22f3-4233-9711-fb85bdd7fa2b",
+                "protocol": "https",
+                "host": [
+                    "golang-final-project-production-1805",
+                    "up",
+                    "railway",
+                    "app"
+                ],
+                "path": [
+                    "api",
+                    "products",
+                    "variants",
+                    "8b0d9f54-22f3-4233-9711-fb85bdd7fa2b"
+                ]
+                }
+            },
+            "response": [],
+            "uid": "8991000-433b0763-22e5-4f46-86a6-3d3bc416487d"
+            },
+            {
+            "name": "Update Variant By ID",
+            "id": "1ae846fb-6658-47a8-9db0-6a415b604d63",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "PUT",
+                "header": [
+                {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoiNDcxMWJlMTUtOTU2Zi00YzNlLWI0YzQtZjIzZTEwODRjZDcwIiwiZXhwIjoxNzAxMjU2NTI4fQ.3T_Qbrk_iQRVouOvoVZJEGa7yzEMeljveWiF9-j5Yi0",
+                    "type": "text"
+                }
+                ],
+                "body": {
+                "mode": "raw",
+                "raw": "{\n    \"variantName\": \"Black updated\",\n    \"quantity\": 52,\n    \"productID\": \"a4c9fca4-13c4-425e-8a71-73c2c5897f39\"\n}",
+                "options": {
+                    "raw": {
+                    "language": "json"
+                    }
+                }
+                },
+                "url": {
+                "raw": "https://golang-final-project-production-1805.up.railway.app/api/products/variants/8b0d9f54-22f3-4233-9711-fb85bdd7fa2b",
+                "protocol": "https",
+                "host": [
+                    "golang-final-project-production-1805",
+                    "up",
+                    "railway",
+                    "app"
+                ],
+                "path": [
+                    "api",
+                    "products",
+                    "variants",
+                    "8b0d9f54-22f3-4233-9711-fb85bdd7fa2b"
+                ]
+                }
+            },
+            "response": [],
+            "uid": "8991000-1ae846fb-6658-47a8-9db0-6a415b604d63"
+            },
+            {
+            "name": "Delete Variant By ID",
+            "id": "055e6030-2136-4629-9219-c207a240da10",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "DELETE",
+                "header": [
+                {
+                    "key": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoiNDcxMWJlMTUtOTU2Zi00YzNlLWI0YzQtZjIzZTEwODRjZDcwIiwiZXhwIjoxNzAxMjU3OTY2fQ.lP3RIGP_4QDUPG6kRmJygFPi3R4f29SerfTvYyNxANY",
+                    "type": "text"
+                }
+                ],
+                "url": {
+                "raw": "https://golang-final-project-production-1805.up.railway.app/api/products/variants/40ccb7c2-d0c8-47e1-b58f-bd5714941cb0",
+                "protocol": "https",
+                "host": [
+                    "golang-final-project-production-1805",
+                    "up",
+                    "railway",
+                    "app"
+                ],
+                "path": [
+                    "api",
+                    "products",
+                    "variants",
+                    "40ccb7c2-d0c8-47e1-b58f-bd5714941cb0"
+                ]
+                }
+            },
+            "response": [],
+            "uid": "8991000-055e6030-2136-4629-9219-c207a240da10"
+            }
+        ],
+        "id": "06cb9348-3a50-413b-9e87-700d27b0e257",
+        "uid": "8991000-06cb9348-3a50-413b-9e87-700d27b0e257"
+        }
+    ]
+    }
+}

@@ -6,12 +6,14 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/cloudinary/cloudinary-go/v2"
+	"github.com/cloudinary/cloudinary-go/v2/api/uploader"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
-func CreateProduct(c *gin.Context, db *gorm.DB) {
+func CreateProduct(c *gin.Context, db *gorm.DB, cld *cloudinary.Cloudinary) {
 	var request struct {
 		Name     string `json:"name" binding:"required"`
 		ImageUrl string `json:"imageUrl" binding:"required"`
@@ -35,9 +37,16 @@ func CreateProduct(c *gin.Context, db *gorm.DB) {
 		return
 	}
 
+	// Cloudinary
+	uploadResult, err := cld.Upload.Upload(c.Request.Context(), request.ImageUrl, uploader.UploadParams{})
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to upload image"})
+		return
+	}
+
 	product := models.Product{
 		Name:     request.Name,
-		ImageUrl: request.ImageUrl,
+		ImageUrl: uploadResult.SecureURL,
 		AdminID:  adminID,
 	}
 
@@ -112,7 +121,7 @@ func GetProductByID(c *gin.Context, db *gorm.DB) {
 	c.JSON(http.StatusOK, product)
 }
 
-func UpdateProductByID(c *gin.Context, db *gorm.DB) {
+func UpdateProductByID(c *gin.Context, db *gorm.DB, cld *cloudinary.Cloudinary) {
 	var request struct {
 		Name     string `json:"name" binding:"required"`
 		ImageUrl string `json:"imageUrl" binding:"required"`
@@ -160,9 +169,6 @@ func UpdateProductByID(c *gin.Context, db *gorm.DB) {
 		return
 	}
 
-	existingProduct.Name = request.Name
-	existingProduct.ImageUrl = request.ImageUrl
-
 	tx := db.Begin()
 	defer func() {
 		if r := recover(); r != nil {
@@ -170,6 +176,20 @@ func UpdateProductByID(c *gin.Context, db *gorm.DB) {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": r})
 		}
 	}()
+
+	updatedImageUrl := existingProduct.ImageUrl
+	if existingProduct.ImageUrl != request.ImageUrl {
+		// Cloudinary
+		uploadResult, err := cld.Upload.Upload(c.Request.Context(), request.ImageUrl, uploader.UploadParams{})
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to upload image"})
+			panic(err)
+		}
+		updatedImageUrl = uploadResult.SecureURL
+	}
+
+	existingProduct.Name = request.Name
+	existingProduct.ImageUrl = updatedImageUrl
 
 	if err := services.UpdateProductByID(db, id, existingProduct); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -181,7 +201,7 @@ func UpdateProductByID(c *gin.Context, db *gorm.DB) {
 	c.JSON(http.StatusOK, gin.H{"message": "Product updated successfully"})
 }
 
-func DeleteProductByID(c *gin.Context, db *gorm.DB) {
+func DeleteProductByID(c *gin.Context, db *gorm.DB, cld *cloudinary.Cloudinary) {
 	idString := c.Param("id")
 
 	if idString == "" {
@@ -220,6 +240,7 @@ func DeleteProductByID(c *gin.Context, db *gorm.DB) {
 	}
 
 	variants, _ := services.GetVariantsByProductID(db, id)
+	publicImageID := services.GetPublicImageIDFromCloudinaryURL(product.ImageUrl)
 
 	tx := db.Begin()
 	defer func() {
@@ -241,6 +262,13 @@ func DeleteProductByID(c *gin.Context, db *gorm.DB) {
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
 		panic(err)
+	}
+
+	_, err = cld.Upload.Destroy(c.Request.Context(), uploader.DestroyParams{PublicID: publicImageID})
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete image from Cloudinary"})
+		tx.Rollback()
+		return
 	}
 
 	tx.Commit()

@@ -17,5 +17,15 @@ func main() {
 	routes.ProductRoute(r, db)
 	routes.VariantRoutes(r, db)
 
-	r.Run(os.Getenv("PORT"))
+	port := envPortOr("3000")
+	r.Run(port)
+}
+
+func envPortOr(port string) string {
+	// If `PORT` variable in environment exists, return it
+	if envPort := os.Getenv("PORT"); envPort != "" {
+		return ":" + envPort
+	}
+	// Otherwise, return the value of `port` variable from function argument
+	return ":" + port
 }

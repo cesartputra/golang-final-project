@@ -3,6 +3,7 @@ package main
 import (
 	database "golang-final-project/dabatase"
 	"golang-final-project/routes"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -16,5 +17,5 @@ func main() {
 	routes.ProductRoute(r, db)
 	routes.VariantRoutes(r, db)
 
-	r.Run(":8080")
+	r.Run(os.Getenv("PORT"))
 }

@@ -20,9 +20,9 @@ func ProductRoute(route *gin.Engine, db *gorm.DB, cld *cloudinary.Cloudinary) {
 		controllers.GetProductByID(c, db)
 	})
 	route.PUT("/api/products/:id", middlewares.AuthenticateJWT(), func(c *gin.Context) {
-		controllers.UpdateProductByID(c, db)
+		controllers.UpdateProductByID(c, db, cld)
 	})
 	route.DELETE("/api/products/:id", middlewares.AuthenticateJWT(), func(c *gin.Context) {
-		controllers.DeleteProductByID(c, db)
+		controllers.DeleteProductByID(c, db, cld)
 	})
 }
